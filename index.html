@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Suscripción</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(120deg, #00c6ff, #0072ff);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card {
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      width: 320px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      text-align: center;
+      animation: aparecer 0.8s ease;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    p {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    input[type="email"]:focus {
+      border-color: #0072ff;
+      box-shadow: 0 0 5px rgba(0,114,255,0.5);
+    }
+
+    .checkbox {
+      margin-top: 15px;
+      text-align: left;
+      font-size: 13px;
+      color: #555;
+    }
+
+    .checkbox input {
+      margin-right: 5px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 10px;
+      background: #0072ff;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #005ecb;
+    }
+
+    .mensaje {
+      margin-top: 15px;
+      color: green;
+      font-size: 14px;
+      display: none;
+    }
+
+    @keyframes aparecer {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="card">
+  <h2>Suscríbete</h2>
+  <p>Recibe novedades en tu correo</p>
+
+  <form id="formSuscripcion">
+    <input type="email" id="correo" placeholder="Correo electrónico" required>
+
+    <div class="checkbox">
+      <input type="checkbox" id="terminos">
+      <label for="terminos">Acepto términos y condiciones</label>
+    </div>
+
+    <button type="submit">Suscribirme</button>
+  </form>
+
+  <div class="mensaje" id="mensaje">¡Suscripción exitosa!</div>
+</div>
+
+<script>
+  const form = document.getElementById("formSuscripcion");
+  const mensaje = document.getElementById("mensaje");
+
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const correo = document.getElementById("correo").value.trim();
+    const terminos = document.getElementById("terminos").checked;
+
+    // Validación correo
+    const regexCorreo = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+
+    if(!regexCorreo.test(correo)){
+      alert("Ingresa un correo válido");
+      return;
+    }
+
+    if(!terminos){
+      alert("Debes aceptar los términos y condiciones");
+      return;
+    }
+
+    mensaje.style.display = "block";
+    form.reset();
+  });
+</script>
+
+</body>
+</html>
