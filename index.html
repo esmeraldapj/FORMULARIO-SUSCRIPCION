@@ -1,79 +1,99 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Suscripción</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Suscripción</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #eaf4ff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0072ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
 
-        .formulario {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            width: 320px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.2);
-        }
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      width: 300px;
+      text-align: center;
+    }
 
-        h2 {
-            text-align: center;
-        }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
 
-        input[type="email"] {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
+    button {
+      background: #0072ff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
 
-        .checkbox {
-            margin: 10px 0;
-        }
-
-        button {
-            width: 100%;
-            padding: 10px;
-            background: #28a745;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #1e7e34;
-        }
-    </style>
+    .mensaje {
+      margin-top: 10px;
+      color: green;
+      display: none;
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="formulario">
-    <h2>Suscripción</h2>
+<div class="card">
+  <h2>Suscríbete</h2>
 
-    <form>
-        <!-- Validación automática de correo -->
-        <input type="email" placeholder="Correo electrónico" required>
+  <form id="formSuscripcion">
+    <input type="email" id="correo" placeholder="Correo electrónico" required>
 
-        <!-- Checkbox obligatorio -->
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" required>
-                Acepto los términos y condiciones
-            </label>
-        </div>
+    <div style="text-align:left; font-size:13px;">
+      <input type="checkbox" id="terminos">
+      Acepto términos y condiciones
+    </div>
 
-        <button type="submit">Suscribirse</button>
-    </form>
+    <button type="submit">Suscribirme</button>
+  </form>
+
+  <div id="mensaje" class="mensaje">¡Suscripción exitosa!</div>
 </div>
+
+<script>
+  const form = document.getElementById("formSuscripcion");
+  const mensaje = document.getElementById("mensaje");
+
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const correo = document.getElementById("correo").value;
+    const terminos = document.getElementById("terminos").checked;
+
+    // Validación automática de HTML5 + extra
+    if (!form.checkValidity()) {
+      form.reportValidity(); // muestra error del navegador
+      return;
+    }
+
+    if (!terminos) {
+      alert("Debes aceptar los términos y condiciones");
+      return;
+    }
+
+    // Mostrar mensaje
+    mensaje.style.display = "block";
+
+    // Limpiar formulario
+    form.reset();
+  });
+</script>
 
 </body>
 </html>
